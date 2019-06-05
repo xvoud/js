@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		.block{
+			position: absolute;
+			height: 80px;
+			width: 80px;
+		}
+		.img transition
+	</style>
+</head>
+<body style="background-image: url(bg.jpg); background-size: 50%">
+<h1>Очки: <span class="score">0</span></h1>
+<h1>ЖУКИ: <span class="bugs">0</span></h1>
+<script type="text/javascript">
+	//массивы не только там где много элементов
+	//циклы не только для массивов
+	let clientY = 0;
+	let clientX = 0;
+	let score = 0;
+	let miss = 0;
+	let randomizator = function(arg){
+		let random = Math.random()*arg
+		let round = Math.round(random) 
+		let check = round+"px"//надо плюс пх обьяснить на тупом примере 
+		return check
+	}
+
+document.onclick = function(arg){
+	clientY = arg.clientY;
+	clientX = arg.clientX;
+
+}
+	/*муравьи*/
+	let func = function(){
+		miss = miss + 1;
+		document.querySelector('.bugs').innerHTML = miss;
+		let img = document.createElement("img");
+		document.body.appendChild(img);
+		img.classList.add("block");
+		img.src = "img.svg"
+		img.style.top = "700px" 
+		img.style.left = randomizator(1200)//Math.round(Math.random()*window.innerWidth) + 'px';
+		img.style.transition = "13s"
+
+		
+		
+		//Math.round(Math.random()*window.innerHeight-100) + 'px';
+	
+
+			img.onclick = function(){
+				//console.dir(img)
+				//img.remove();
+				img.style.display='none'
+				score++;
+				document.querySelector('.score').innerHTML = score;
+			}
+
+				
+
+			let func2 = function () {
+				img.style.top = "0px"
+			}
+		setTimeout(func2,700)
+
+			
+	}
+	
+	
+	/*гусеницы*/
+	let create_caterpillar = function() {
+		miss = miss + 1;
+		document.querySelector('.bugs').innerHTML = miss;
+		let caterpillar = document.createElement("img");
+		document.body.appendChild(caterpillar);
+		
+		caterpillar.classList.add("block", "caterpillar");
+		caterpillar.src = "caterpillar.png"
+		caterpillar.style.top = "700px" 
+		caterpillar.style.left = randomizator(1200)
+		caterpillar.style.transition = "13s";
+		let allcat = document.querySelectorAll(".caterpillar") 
+		for()
+		allcat.onclick = function(){
+				caterpillar.style.display='none'
+				score++;
+				document.querySelector('.score').innerHTML = score;
+
+
+				document.querySelector('.bugs').innerHTML = miss;
+				let ctp = document.createElement("img");
+				document.body.appendChild(ctp);
+				
+				ctp.classList.add("block");
+				ctp.src = "caterpillar.png"
+				
+				console.dir(caterpillar)
+				ctp.style.position = "absolute";
+				ctp.style.transition = "7s";
+
+				ctp.style.left = clientX+ "px";
+				ctp.style.top = clientY + "px";
+
+
+				let func4 = function () {
+				ctp.style.top = "0px"
+				}
+				setTimeout(func4,5000)
+				
+				ctp.onclick = function() {
+
+				}
+		}
+
+		let func3 = function () {
+				caterpillar.style.top = "0px"
+			}
+		setTimeout(func3,1000)
+
+	}
+
+
+	let stop2 = function() {
+		clearInterval(clear2)
+	}
+	
+	let clear2 = setInterval(create_caterpillar,700)
+	setTimeout(stop2, 7000)
+	let stop = function() {
+		clearInterval(clear)
+	}
+	let clear = setInterval(func,700)
+	setTimeout(stop, 7000)
+	
+
+
+
+	
+	
+
+	let check = function(){
+		if(miss>=score){//условие попроще сделать для детей больше 10 то вин
+			alert("you lose");
+			clearInterval(clear); // доп задание подумать как остановить интервал
+		}else{
+			alert("you win");
+			clearInterval(clear);
+		}
+	}
+
+
+	
+	setTimeout(check, 15000)
+
+</script>
+</body>
+</html>
